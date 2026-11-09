@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPOasis Bing Ads 周报与全周期趋势(10.12-10.18)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; background: #f0f2f5; color: #1f2937; line-height: 1.7; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 20px 80px; }
+  header.hero { background: linear-gradient(135deg, #0b5394 0%, #1a73c7 100%); color: #fff; border-radius: 14px; padding: 30px 34px; margin-bottom: 24px; }
+  header.hero h1 { font-size: 26px; margin-bottom: 8px; }
+  header.hero .sub { opacity: .92; font-size: 14px; }
+  header.hero .meta { margin-top: 12px; font-size: 13px; opacity: .85; }
+  h2.sec { font-size: 19px; margin: 34px 0 14px; padding-left: 12px; border-left: 4px solid #1a73c7; }
+  .card { background: #fff; border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px rgba(0,0,0,.06); margin-bottom: 16px; }
+  /* callouts */
+  .co { border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 14.5px; }
+  .cs { background: linear-gradient(135deg, #e6f6ec, #d2efdd); border-left: 4px solid #0d904f; }
+  .cw { background: linear-gradient(135deg, #fdf3e0, #fbe8c8); border-left: 4px solid #e8710a; }
+  .ci { background: linear-gradient(135deg, #e8f1fb, #d8e8fa); border-left: 4px solid #1a73c7; }
+  .cd { background: linear-gradient(135deg, #fdeaea, #f9d6d6); border-left: 4px solid #c5221f; }
+  /* KPI */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0; }
+  .kpi-card { border-radius: 10px; padding: 14px 16px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.07); border-top: 3px solid #d1d5db; }
+  .kpi-card.good { border-top-color: #0d904f; }
+  .kpi-card.warn { border-top-color: #e8710a; }
+  .kpi-card.bad  { border-top-color: #c5221f; }
+  .kpi-card .ico { font-size: 20px; }
+  .kpi-card .v { font-size: 24px; font-weight: 700; margin: 2px 0; }
+  .kpi-card .l { font-size: 12.5px; color: #6b7280; }
+  .kpi-card .c { font-size: 12px; margin-top: 4px; color: #92400e; }
+  .kpi-card .c.up { color: #0d904f; }
+  .kpi-card .c.flat { color: #6b7280; }
+  /* table */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+  th { background: #f3f6fa; text-align: right; padding: 8px 10px; border-bottom: 2px solid #dbe3ee; white-space: nowrap; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eef1f6; text-align: right; font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; }
+  tr.hl td { background: #e6f6ec; font-weight: 600; }
+  tr.dim td { color: #9ca3af; }
+  td.neg { color: #c5221f; }
+  td.pos { color: #0d904f; font-weight: 600; }
+  /* legend */
+  .lg { font-size: 12.5px; color: #6b7280; margin-bottom: 10px; }
+  .chart-box { position: relative; height: 340px; margin: 16px 0 6px; }
+  .chart-box.tall { height: 300px; }
+  .footnote { font-size: 12.5px; color: #9ca3af; margin-top: 6px; }
+  ul.tight { margin: 8px 0 8px 22px; }
+  ul.tight li { margin-bottom: 6px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+  /* nav */
+  nav.toc { position: fixed; right: 18px; top: 90px; width: 198px; font-size: 12.5px; }
+  nav.toc a { display: block; padding: 6px 10px; color: #6b7280; text-decoration: none; border-left: 3px solid transparent; }
+  nav.toc a.on { color: #1a73c7; background: #e8f1fb; border-left-color: #1a73c7; font-weight: 600; }
+  @media (max-width: 1360px) { nav.toc { display: none; } }
+  .ab-box { border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 18px; margin: 10px 0; }
+  .ab-box h4 { font-size: 14.5px; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>IPOasis Bing Ads 周报与全周期趋势</h1>
+  <div class="sub">上周 10.12 - 10.18 · 自投放(8.25)以来逐周趋势回顾</div>
+  <div class="meta">账户 aid 189338274 · 月结(额度=IO 剩余预算) · 两条系列 $20/天 · 数据口径:Bing 账户后台 + GA4(bing/cpc)交叉验证 · 生成于 10.19</div>
+</header>
+
+<nav class="toc" id="toc">
+  <a href="#s1">核心结论</a>
+  <a href="#s2">上周速览</a>
+  <a href="#s3">全周期逐周趋势</a>
+  <a href="#s5">上周逐日明细</a>
+  <a href="#s6">GA4 口径对照</a>
+  <a href="#s7">后续</a>
+</nav>
+
+<h2 class="sec" id="s1">一、核心结论</h2>
+<div class="card">
+  <div class="lg">🟢 好消息 · 🟡 需要注意 · 🔵 中性信息</div>
+  <p style="font-size:16px; font-weight:600;">上周是 Bing 投放以来表现最好的一周,购买和注册双双刷新单周纪录,10 月以来购买端的改善还在延续。</p>
+  <ul class="tight">
+    <li>🟢 上周购买 <b>4 单创单周新高</b>(购买成本 $75.50),注册 20 单同样是新高,注册成本 $15.10 为全周期最低。</li>
+    <li>🟢 10 月迄今(10.1 - 10.18)购买 7 单、成本 $103.85,延续了 9.21 以来每周都有单、成本整体下移的走势。</li>
+    <li>🟡 购买单量仍小,周度波动大(最好 $54.47、最差 $227.98),看趋势方向就好,单周数字别太当真。</li>
+    <li>🔵 上周展示暴涨 70%(16,025)但点击只增 28%,CTR 降到 2.27%,应是 Bing 放量到更多展示位;CPC 稳在 $0.83,转化未受影响。</li>
+  </ul>
+</div>
+
+<h2 class="sec" id="s2">二、上周速览(10.12 - 10.18)</h2>
+<div class="kpis">
+  <div class="kpi-card"><div class="ico">💵</div><div class="v">$301.98</div><div class="l">消耗</div><div class="c flat">上周 $228.40(+32%)</div></div>
+  <div class="kpi-card"><div class="ico">👁</div><div class="v">16,025</div><div class="l">展示</div><div class="c flat">上周 9,393(+71%)</div></div>
+  <div class="kpi-card"><div class="ico">🖱</div><div class="v">364</div><div class="l">点击</div><div class="c flat">CPC $0.83(持平)</div></div>
+  <div class="kpi-card good"><div class="ico">📝</div><div class="v">20</div><div class="l">注册</div><div class="c up">成本 $15.10,全周期最低</div></div>
+  <div class="kpi-card good"><div class="ico">🛒</div><div class="v">4</div><div class="l">购买</div><div class="c up">成本 $75.50,单周新高</div></div>
+</div>
+<div class="co cs">购买和注册双双刷新投放以来的单周纪录,而且是在消耗只比上上周多 $74 的情况下做到的,效率在改善而不是靠堆钱。</div>
+
+<h2 class="sec" id="s3">三、全周期逐周趋势(8.26 - 10.18)</h2>
+<div class="card">
+  <table>
+    <tr><th>周</th><th>消耗</th><th>展示</th><th>CPM</th><th>点击</th><th>CTR</th><th>CPC</th><th>注册</th><th>注册率</th><th>注册成本</th><th>购买</th><th>购买率</th><th>购买成本</th></tr>
+    <tr class="dim"><td>8.24 - 8.30 *</td><td>$46.48</td><td>1,981</td><td>$23.5</td><td>70</td><td>3.53%</td><td>$0.66</td><td>0</td><td>-</td><td>-</td><td>0</td><td>-</td><td>-</td></tr>
+    <tr><td>8.31 - 9.6</td><td>$235.15</td><td>13,887</td><td>$16.9</td><td>365</td><td>2.63%</td><td>$0.64</td><td>10</td><td>2.74%</td><td>$23.51</td><td>0</td><td>-</td><td>-</td></tr>
+    <tr><td>9.7 - 9.13</td><td>$307.35</td><td>6,878</td><td>$44.7</td><td>267</td><td>3.88%</td><td>$1.15</td><td>7</td><td>2.62%</td><td>$43.91</td><td>2</td><td>0.75%</td><td>$153.68</td></tr>
+    <tr><td>9.14 - 9.20</td><td>$227.98</td><td>7,886</td><td>$28.9</td><td>264</td><td>3.35%</td><td>$0.86</td><td>11</td><td>4.17%</td><td>$20.73</td><td>1</td><td>0.38%</td><td>$227.98</td></tr>
+    <tr><td>9.21 - 9.27</td><td>$163.42</td><td>8,811</td><td>$18.5</td><td>243</td><td>2.76%</td><td>$0.67</td><td>11</td><td>4.53%</td><td>$14.86</td><td>3</td><td>1.23%</td><td class="pos">$54.47</td></tr>
+    <tr><td>9.28 - 10.4</td><td>$363.48</td><td>12,073</td><td>$30.1</td><td>395</td><td>3.27%</td><td>$0.92</td><td>19</td><td>4.81%</td><td>$19.13</td><td>3</td><td>0.76%</td><td>$121.16</td></tr>
+    <tr><td>10.5 - 10.11</td><td>$228.40</td><td>9,393</td><td>$24.3</td><td>284</td><td>3.02%</td><td>$0.80</td><td>11</td><td>3.87%</td><td>$20.76</td><td>2</td><td>0.70%</td><td>$114.20</td></tr>
+    <tr class="hl"><td>10.12 - 10.18</td><td>$301.98</td><td>16,025</td><td>$18.8</td><td>364</td><td>2.27%</td><td>$0.83</td><td>20</td><td>5.49%</td><td class="pos">$15.10</td><td>4</td><td>1.10%</td><td class="pos">$75.50</td></tr>
+    <tr style="font-weight:700;"><td>全周期合计</td><td>$1,874.24</td><td>76,934</td><td>$24.4</td><td>2,252</td><td>2.93%</td><td>$0.83</td><td>89</td><td>3.95%</td><td>$21.06</td><td>15</td><td>0.67%</td><td>$124.95</td></tr>
+  </table>
+  <div class="footnote">* 首周只含 8.26 - 8.30 共 5 天(8.25 为投放启动日,当日无消耗记录),该周数据不参与环比。</div>
+
+  <div class="chart-box">
+    <canvas id="weeklyChart"></canvas>
+  </div>
+  <div class="footnote">周消耗为柱(左轴,蓝),注册(绿)/购买(橙)为线(右轴)。9.28 - 10.4 一周消耗 $363 偏高,含 9.29 - 9.30 两天的放量测试。</div>
+
+  <div class="chart-box tall">
+    <canvas id="cpaChart"></canvas>
+  </div>
+  <div class="footnote">逐周购买成本(蓝柱)。0 购买的周无柱。样本小,单周起伏大,看方向比看单周绝对值有意义:9.21 起连续 4 周每周 2 单以上,成本整体下移。</div>
+</div>
+
+<div class="co ci"><b>趋势怎么读:</b>注册端从 9 月中旬起稳定在每周 10 - 20 单、成本 $15 - 21,已经是很可预测的基本盘;购买端波动大,但最近 4 周(9.21 起)每周都有 2 单以上,再没有出现过连续两周 0 - 1 单的 9 月上旬情形。消耗基本贴着 $20/天 × 2 条系列的节奏走,没有失控周。</div>
+
+<h2 class="sec" id="s5">四、上周逐日明细(10.12 - 10.18)</h2>
+<div class="card">
+  <table>
+    <tr><th>日期</th><th>展示</th><th>点击</th><th>消耗</th><th>注册</th><th>购买</th></tr>
+    <tr><td>10.12(周一)</td><td>1,814</td><td>42</td><td>$38.91</td><td>1</td><td>1</td></tr>
+    <tr><td>10.13(周二)</td><td>1,706</td><td>48</td><td>$30.51</td><td>5</td><td>0</td></tr>
+    <tr><td>10.14(周三)</td><td>1,989</td><td>66</td><td>$53.71</td><td>1</td><td>0</td></tr>
+    <tr><td>10.15(周四)</td><td>1,877</td><td>49</td><td>$42.70</td><td>4</td><td>0</td></tr>
+    <tr class="hl"><td>10.16(周五)</td><td>3,189</td><td>55</td><td>$35.60</td><td>5</td><td>2</td></tr>
+    <tr><td>10.17(周六)</td><td>2,153</td><td>51</td><td>$50.71</td><td>2</td><td>0</td></tr>
+    <tr><td>10.18(周日)</td><td>3,297</td><td>53</td><td>$49.84</td><td>2</td><td>1</td></tr>
+  </table>
+  <div class="chart-box tall">
+    <canvas id="dailyChart"></canvas>
+  </div>
+  <div class="footnote">全周期逐日消耗(蓝柱,左轴)与每日购买(橙点,右轴)。10.16 和 10.18 两天展示放量到 3,100+,当周 CTR 因此被摊薄,但这两天的转化并不差。</div>
+</div>
+
+<h2 class="sec" id="s6">五、GA4 口径对照(pixel 低估)</h2>
+<div class="card">
+  <table>
+    <tr><th>口径</th><th>注册(10.1 - 10.18)</th><th>购买(10.1 - 10.18)</th><th>购买成本(10.4 - 10.18)</th></tr>
+    <tr><td>Bing 账户后台</td><td>42</td><td>7</td><td>$94.39</td></tr>
+    <tr><td>GA4(bing/cpc)</td><td>75</td><td>11</td><td>$70.79</td></tr>
+    <tr class="hl"><td>GA4 / 账户</td><td>1.79×</td><td>1.57×</td><td>-</td></tr>
+  </table>
+  <div class="co ci">Bing pixel 低估的老问题持续存在:9 月倍率约 2.3×,10 月降到 1.6 - 1.8×,方向不变。想估 Bing 的真实产出时,习惯性把账户数字乘 1.6 - 1.8 修正;本报告趋势部分统一用账户口径(同一把尺子量 8 周),GA4 只在这里做个参照。</div>
+</div>
+
+<h2 class="sec" id="s7">六、后续</h2>
+<div class="card">
+  <div class="co ci">按现状继续投,维持每周看趋势的节奏就好;月度层面等 11 月初的 10 月月报一起看。</div>
+  <ul class="tight">
+    <li>11 月 1 日前后核对 Bing 月结发票与 IO 剩余额度,余额不够会直接停量。</li>
+  </ul>
+</div>
+
+<div style="text-align:center; color:#9ca3af; font-size:12px; margin-top:30px;">IPOasis Bing Ads · 10.12 - 10.18 周报与全周期趋势 · 数据源:Bing Ads 后台(账户口径)+ GA4 · 生成于 2026.10.19</div>
+</div>
+
+<script>
+const WEEKS = ["8.24*","8.31","9.7","9.14","9.21","9.28","10.5","10.12"];
+const COST = [46.48, 235.15, 307.35, 227.98, 163.42, 363.48, 228.40, 301.98];
+const REG  = [0, 10, 7, 11, 11, 19, 11, 20];
+const PUR  = [0, 0, 2, 1, 3, 3, 2, 4];
+
+new Chart(document.getElementById('weeklyChart'), {
+  data: {
+    labels: WEEKS,
+    datasets: [
+      { type: 'bar', label: '周消耗($)', data: COST, backgroundColor: '#7fb3e3', yAxisID: 'y', order: 2 },
+      { type: 'line', label: '注册(右轴)', data: REG, borderColor: '#0d904f', backgroundColor: '#0d904f', tension: .3, yAxisID: 'y1', order: 1 },
+      { type: 'line', label: '购买(右轴)', data: PUR, borderColor: '#e8710a', backgroundColor: '#e8710a', tension: .3, yAxisID: 'y1', order: 1 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'bottom' } },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: '消耗($)' }, grid: { color: '#f0f2f5' } },
+      y1: { beginAtZero: true, position: 'right', title: { display: true, text: '转化数' }, grid: { drawOnChartArea: false }, suggestedMax: 24 }
+    }
+  }
+});
+
+const CPA = [null, null, 153.68, 227.98, 54.47, 121.16, 114.20, 75.50];
+new Chart(document.getElementById('cpaChart'), {
+  type: 'bar',
+  data: {
+    labels: WEEKS,
+    datasets: [
+      { label: '购买成本($)', data: CPA, backgroundColor: '#7fb3e3' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, title: { display: true, text: '购买成本($)' }, suggestedMax: 260, grid: { color: '#f0f2f5' } } }
+  }
+});
+
+const DAYS = ["8.26","8.27","8.28","8.29","8.30","8.31","9.1","9.2","9.3","9.4","9.5","9.6","9.7","9.8","9.9","9.10","9.11","9.12","9.13","9.14","9.15","9.16","9.17","9.18","9.19","9.20","9.21","9.22","9.23","9.24","9.25","9.26","9.27","9.28","9.29","9.30","10.1","10.2","10.3","10.4","10.5","10.6","10.7","10.8","10.9","10.10","10.11","10.12","10.13","10.14","10.15","10.16","10.17","10.18"];
+const DCOST = [10.83,11.43,5.94,10.13,8.15,3.00,37.60,39.82,39.95,38.98,40.44,35.36,47.20,47.79,44.92,43.36,41.15,42.16,40.77,41.25,40.91,39.17,29.20,37.24,26.43,13.78,32.33,14.83,10.13,24.33,20.10,25.53,36.17,38.63,62.23,66.03,55.20,59.29,46.14,35.96,32.47,30.07,25.46,34.43,32.99,30.59,42.39,38.91,30.51,53.71,42.70,35.60,50.71,49.84];
+const DPUR  = [0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,2,1,0,1,0,0,1,0,0,1,0,0,0,0,1,1,0,0,0,2,0,1];
+
+new Chart(document.getElementById('dailyChart'), {
+  data: {
+    labels: DAYS,
+    datasets: [
+      { type: 'bar', label: '日消耗($)', data: DCOST, backgroundColor: '#a9c9e8', yAxisID: 'y', order: 2 },
+      { type: 'line', label: '日购买(右轴)', data: DPUR, borderColor: '#e8710a', backgroundColor: '#e8710a', showLine: false, pointRadius: 3.5, yAxisID: 'y1', order: 1 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'bottom' } },
+    scales: {
+      x: { ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 12, font: { size: 10 } } },
+      y: { beginAtZero: true, title: { display: true, text: '消耗($)' }, grid: { color: '#f0f2f5' } },
+      y1: { beginAtZero: true, position: 'right', title: { display: true, text: '购买' }, grid: { drawOnChartArea: false }, suggestedMax: 3, ticks: { stepSize: 1 } }
+    }
+  }
+});
+
+// scroll-spy
+const secs = [...document.querySelectorAll('h2.sec')];
+const links = [...document.querySelectorAll('nav.toc a')];
+window.addEventListener('scroll', () => {
+  let cur = secs[0];
+  for (const s of secs) { if (s.getBoundingClientRect().top < 140) cur = s; }
+  links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur.id));
+}, { passive: true });
+</script>
+</body>
+</html>

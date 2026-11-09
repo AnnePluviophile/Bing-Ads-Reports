@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPOasis Bing Ads 周报与全周期趋势(10.19-10.25)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; background: #f0f2f5; color: #1f2937; line-height: 1.7; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 20px 80px; }
+  header.hero { background: linear-gradient(135deg, #0b5394 0%, #1a73c7 100%); color: #fff; border-radius: 14px; padding: 30px 34px; margin-bottom: 24px; }
+  header.hero h1 { font-size: 26px; margin-bottom: 8px; }
+  header.hero .sub { opacity: .92; font-size: 14px; }
+  header.hero .meta { margin-top: 12px; font-size: 13px; opacity: .85; }
+  h2.sec { font-size: 19px; margin: 34px 0 14px; padding-left: 12px; border-left: 4px solid #1a73c7; }
+  .card { background: #fff; border-radius: 12px; padding: 22px 26px; box-shadow: 0 1px 4px rgba(0,0,0,.06); margin-bottom: 16px; }
+  .co { border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 14px; }
+  .cs { background: linear-gradient(135deg, #e6f6ec, #d2efdd); border-left: 4px solid #0d904f; }
+  .cw { background: linear-gradient(135deg, #fdf3e0, #fbe8c8); border-left: 4px solid #e8710a; }
+  .ci { background: linear-gradient(135deg, #e8f1fb, #d8e8fa); border-left: 4px solid #1a73c7; }
+  .cd { background: linear-gradient(135deg, #fdeaea, #f9d6d6); border-left: 4px solid #c5221f; }
+  .verdict { font-size: 15px; font-weight: 700; margin: 6px 0 12px; padding: 14px 16px; background: #e6f6ec; border-radius: 8px; border-left: 4px solid #0d904f; }
+  h3 { font-size: 14.5px; margin: 18px 0 8px; }
+  .tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .tg { background: #e6f4ea; color: #137333; }
+  .tr { background: #fce8e6; color: #c5221f; }
+  .to { background: #fef3e6; color: #c5600a; }
+  .ty { background: #f1f3f4; color: #5f6368; }
+  .insight { background: #fffdf5; border: 1px solid #fde293; border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 14px; }
+  .insight-title { font-size: 13px; font-weight: 700; color: #b06000; margin-bottom: 6px; }
+  .action { background: #fff; border-radius: 10px; padding: 14px 16px; margin: 10px 0; border-left: 4px solid #1a73c7; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .action.warn { border-left-color: #e8710a; }
+  .action.ok { border-left-color: #0d904f; }
+  .action.bad { border-left-color: #c5221f; }
+  .action .head { font-weight: 700; margin-bottom: 4px; }
+  .pri { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; color: #fff; margin-right: 6px; }
+  .p1 { background: #e8710a; }
+  .p2 { background: #1a73c7; }
+  .p3 { background: #5f6368; }
+  .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 800px) { .chart-row { grid-template-columns: 1fr; } }
+  code { background: #f1f3f4; padding: 1px 5px; border-radius: 3px; font-size: 12px; color: #c5221f; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0; }
+  .kpi-card { border-radius: 10px; padding: 14px 16px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.07); border-top: 3px solid #d1d5db; }
+  .kpi-card.good { border-top-color: #0d904f; }
+  .kpi-card.warn { border-top-color: #e8710a; }
+  .kpi-card.bad  { border-top-color: #c5221f; }
+  .kpi-card .ico { font-size: 20px; }
+  .kpi-card .v { font-size: 24px; font-weight: 700; margin: 2px 0; }
+  .kpi-card .l { font-size: 12.5px; color: #6b7280; }
+  .kpi-card .c { font-size: 12px; margin-top: 4px; color: #92400e; }
+  .kpi-card .c.up { color: #0d904f; }
+  .kpi-card .c.flat { color: #6b7280; }
+  .kpi-card .c.down { color: #c5221f; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+  th { background: #f3f6fa; text-align: right; padding: 8px 10px; border-bottom: 2px solid #dbe3ee; white-space: nowrap; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eef1f6; text-align: right; font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; }
+  tr.hl td { background: #e6f6ec; font-weight: 600; }
+  tr.dim td { color: #9ca3af; }
+  td.neg { color: #c5221f; }
+  td.pos { color: #0d904f; font-weight: 600; }
+  .lg { font-size: 12.5px; color: #6b7280; margin-bottom: 10px; }
+  .chart-box { position: relative; height: 340px; margin: 16px 0 6px; }
+  .chart-box.tall { height: 300px; }
+  .footnote { font-size: 12.5px; color: #9ca3af; margin-top: 6px; }
+  ul.tight { margin: 8px 0 8px 22px; }
+  ul.tight li { margin-bottom: 6px; }
+  nav.toc { position: fixed; right: 18px; top: 90px; width: 198px; font-size: 12.5px; }
+  nav.toc a { display: block; padding: 6px 10px; color: #6b7280; text-decoration: none; border-left: 3px solid transparent; }
+  nav.toc a.on { color: #1a73c7; background: #e8f1fb; border-left-color: #1a73c7; font-weight: 600; }
+  @media (max-width: 1360px) { nav.toc { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>IPOasis Bing Ads 周报与全周期趋势</h1>
+  <div class="sub">上周 10.19 - 10.25 · 环比 10.12 - 10.18 · 自投放(8.25)以来逐周趋势</div>
+  <div class="meta">账户 aid 189338274 · 三条系列(动态购买 $20 / 动态注册 $20 / ISP $10) · 口径:Bing 账户后台主转化(Purchase / Register) · GA4 bing/cpc 交叉 · 生成于 10.26</div>
+</header>
+
+<nav class="toc" id="toc">
+  <a href="#s1">核心结论</a>
+  <a href="#s2">上周速览</a>
+  <a href="#s3">分活动</a>
+  <a href="#s3b">Register</a>
+  <a href="#s3c">Purchase</a>
+  <a href="#s4">全周期趋势</a>
+  <a href="#s5">上周逐日</a>
+  <a href="#s6">GA4 对照</a>
+  <a href="#s7">观察项</a>
+</nav>
+
+<h2 class="sec" id="s1">一、核心结论</h2>
+<div class="card">
+  <div class="lg">🟢 亮点 · 🟠 问题 · 🟡 待验证</div>
+  <div class="verdict">
+    🟢 购买 4 → 7 单，账户购买成本 $75.50 → $51.63，投放以来单周最好。钱多花了 $59，多买了 3 单。注册从高峰回落，但注册系列自己的 CPA 仍在 $11 附近，基本盘没坏。
+  </div>
+  <ul class="tight">
+    <li>🟢 ISP 清词见效：展示 3,517 → 827，CTR 1.51% → 4.23%，购买 2 → 3，CPA $27 → $17。10.21 一天就出了 2 单(账户当天 4 单里一半是它)。</li>
+    <li>🟢 动态购买花上去了($86 → $150)，单也上去(2 → 4)，CPA $43 → $37。预算 $20 几乎花满。</li>
+    <li>🟡 注册 20 → 15，账户注册成本 $15.10 → $24.09。系列本身 CPA $8.08 → $10.64，掉的是量不是效率。</li>
+    <li>🟠 ISP 后半周停量：10.24 / 10.25 消耗 $0。词收太紧的嫌疑大，下周先看搜索词再决定加不加权。</li>
+    <li>🔵 CPC $0.83 → $1.08(+30%)。展示 -31%、点击 -8%、CTR 升到 3.03%。位置收回 + 无效展示变少，不是需求没了。</li>
+  </ul>
+  <div class="co ci"><b>口径：</b>主转化 = Bing 账户 Purchase / Register。注册率 = 注册 ÷ 点击，购买率 = 购买 ÷ 注册(漏斗)。注册/购买成本若写「账户」= 账户总消耗 ÷ 该转化；写「系列」= 该活动消耗 ÷ 该活动主转化。Bing pixel 低估，GA4 对照见第六节。</div>
+</div>
+
+<h2 class="sec" id="s2">二、上周速览(10.19 - 10.25)</h2>
+<div class="kpis">
+  <div class="kpi-card warn"><div class="ico">💵</div><div class="v">$361.41</div><div class="l">消耗</div><div class="c down">上上周 $301.98(+20%)</div></div>
+  <div class="kpi-card"><div class="ico">👁</div><div class="v">11,006</div><div class="l">展示</div><div class="c down">上上周 16,025(-31%)</div></div>
+  <div class="kpi-card"><div class="ico">🖱</div><div class="v">334</div><div class="l">点击</div><div class="c down">CPC $1.08(上上周 $0.83)</div></div>
+  <div class="kpi-card warn"><div class="ico">📝</div><div class="v">15</div><div class="l">注册</div><div class="c down">成本 $24.09 · 系列 CPA $10.64</div></div>
+  <div class="kpi-card good"><div class="ico">🛒</div><div class="v">7</div><div class="l">购买</div><div class="c up">成本 $51.63，单周新低</div></div>
+</div>
+<div class="co cs">花多 $59，多买 3 单。注册少 5 单，但注册系列 CPA 仍在 $11 附近，基本盘没坏。</div>
+
+<table>
+  <tr><th>时间</th><th>消耗</th><th>展示</th><th>CPM</th><th>点击</th><th>CTR</th><th>CPC</th><th>注册</th><th>注册率</th><th>注册成本</th><th>购买</th><th>购买率</th><th>购买成本</th></tr>
+  <tr><td>本周 10.19-10.25</td><td>$361.41</td><td>11,006</td><td>$32.84</td><td>334</td><td>3.03%</td><td>$1.08</td><td>15</td><td>4.49%</td><td>$24.09</td><td>7</td><td>46.7%</td><td class="pos">$51.63</td></tr>
+  <tr><td>上周 10.12-10.18</td><td>$301.98</td><td>16,025</td><td>$18.84</td><td>364</td><td>2.27%</td><td>$0.83</td><td>20</td><td>5.49%</td><td>$15.10</td><td>4</td><td>20.0%</td><td>$75.50</td></tr>
+  <tr><td><b>变化</b></td><td class="neg">+19.7%</td><td class="neg">-31.3%</td><td class="neg">+74.3%</td><td class="neg">-8.2%</td><td class="pos">+0.76pp</td><td class="neg">+30.1%</td><td class="neg">-25.0%</td><td class="neg">-1.00pp</td><td class="neg">+59.5%</td><td class="pos">+75.0%</td><td class="pos">+26.7pp</td><td class="pos">-31.6%</td></tr>
+</table>
+<div class="footnote">注册率=注册/点击；购买率=购买/注册。注册/购买成本 = 账户总消耗 ÷ 该转化。注册系列自己的 CPA 见下一节。</div>
+<div class="co cs">漏斗端：点击少了 30 个，注册少 5 个，但买的人变多了(4 → 7)。购买率 20% → 47%，钱更多流向会买的人。代价是点更贵、注册账面成本被购买侧消耗摊高。</div>
+
+<h2 class="sec" id="s3">三、分活动总览</h2>
+<div class="card">
+  <h3>本周 vs 上周</h3>
+  <table>
+    <tr><th>活动</th><th>本周花费</th><th>点击</th><th>CTR</th><th>CPC</th><th>主转化</th><th>系列 CPA</th><th>上周主转化</th><th>判断</th></tr>
+    <tr><td>动态购买 $20</td><td>$149.89(+74%)</td><td>89</td><td>2.34%</td><td>$1.68</td><td>购买 4</td><td class="pos">$37.47</td><td>2</td><td><span class="tag tg">花上去、单也上去。别加预算</span></td></tr>
+    <tr class="hl"><td>动态注册 $20</td><td>$159.56(持平)</td><td>210</td><td>3.30%</td><td>$0.76</td><td>注册 15</td><td class="pos">$10.64</td><td>20</td><td><span class="tag tg">量掉、效率还在。先别动出价</span></td></tr>
+    <tr><td>ISP 购买 $10</td><td>$51.96(持平)</td><td>35</td><td class="pos">4.23%</td><td>$1.48</td><td>购买 3</td><td class="pos">$17.32</td><td>2</td><td><span class="tag to">清词有效，后半周停量</span></td></tr>
+  </table>
+
+  <div class="chart-row">
+    <div class="chart-box tall"><canvas id="campCostChart"></canvas></div>
+    <div class="chart-box tall"><canvas id="campPurChart"></canvas></div>
+  </div>
+  <div class="footnote">左：各活动花费本周 vs 上周。右：购买贡献(注册系列本周 0 购买)。</div>
+
+  <h3>展示份额(本周 vs 上周)</h3>
+  <table>
+    <tr><th>活动</th><th>上方展示率</th><th>预算损失份额</th><th>排名损失份额</th><th>读法</th></tr>
+    <tr><td>动态购买</td><td>31.45% ← 36.86%</td><td>4.25% ← 13.84%</td><td>94.81% ← 85.62%</td><td>预算几乎花满($20)，瓶颈在排名不是预算。加钱换不来便宜位置</td></tr>
+    <tr><td>动态注册</td><td>32.14% ← 26.88%</td><td>1.77% ← 0.11%</td><td>96.82% ← 98.21%</td><td>预算没卡住。量掉是点击/词侧，不是预算不够</td></tr>
+    <tr><td>ISP</td><td>35.29% ← 10.02%</td><td>2.29% ← 0.42%</td><td>90.03% ← 88.89%</td><td>清词后位置变好。后半周 $0 不是预算打满，是词没量</td></tr>
+  </table>
+  <div class="footnote">Bing 列名：展示份额下降到排名 ≈ 排名损失；展示预算损失的份额 ≈ 预算损失。三条预算损失都 &lt;5%，没有「预算打满所以加钱」的理由。</div>
+
+  <div class="insight">
+    <div class="insight-title">一眼看懂本周结构</div>
+    ① 多花的 $59 几乎全进动态购买($86 → $150)。注册和 ISP 花费持平。<br>
+    ② 7 单购买：动态购买 4 + ISP 3。注册系列 0 购买，它只负责注册。<br>
+    ③ 受众网络 $3.58 / 7 点 / 0 主转化。上上周 $7.45 / 15 点 / 0。连续两周 0，建议三条活动关掉。
+  </div>
+</div>
+
+<h2 class="sec" id="s3b">四、Register：量回落，效率没坏</h2>
+<div class="card">
+  <div class="kpis">
+    <div class="kpi-card warn"><div class="ico">📝</div><div class="v">15</div><div class="l">全账户注册</div><div class="c down">↓ 25%(20 → 15)</div></div>
+    <div class="kpi-card"><div class="ico">💵</div><div class="v">$24.09</div><div class="l">账户注册成本</div><div class="c down">被购买侧消耗摊高</div></div>
+    <div class="kpi-card good"><div class="ico">📌</div><div class="v">$10.64</div><div class="l">注册系列 CPA</div><div class="c flat">上周 $8.08，仍健康</div></div>
+    <div class="kpi-card"><div class="ico">🖱</div><div class="v">210</div><div class="l">注册系列点击</div><div class="c down">261 → 210(-20%)</div></div>
+  </div>
+  <div class="co ci">
+    <b>注册 -5 的拆解：</b>全部发生在动态注册系列(20 → 15)。购买两条本周 0 注册主转化。点击少 51 个，注册跟着少 5 个，转化率 7.66% → 7.14%，几乎没动。
+  </div>
+  <div class="co cs">注册系列维持 $20/天。CPA 从 $8 走到 $11 仍是三条里最稳的，先别改出价、不加预算。</div>
+</div>
+
+<h2 class="sec" id="s3c">五、Purchase：单周新高，别按这一周加预算</h2>
+<div class="card">
+  <div class="kpis">
+    <div class="kpi-card good"><div class="ico">🛒</div><div class="v">7</div><div class="l">账户购买</div><div class="c up">4 → 7(+75%)</div></div>
+    <div class="kpi-card good"><div class="ico">💸</div><div class="v">$51.63</div><div class="l">账户购买成本</div><div class="c up">投放以来单周最低</div></div>
+    <div class="kpi-card good"><div class="ico">📦</div><div class="v">4 / 3</div><div class="l">动态购买 / ISP</div><div class="c up">系列 CPA $37 / $17</div></div>
+    <div class="kpi-card warn"><div class="ico">📅</div><div class="v">10.21</div><div class="l">一天 4 单</div><div class="c flat">占全周一半以上</div></div>
+  </div>
+  <div class="co ci">
+    <b>购买 +3 的拆解：</b><br>
+    🟢 动态购买 2 → 4，CPA $43 → $37。花费几乎贴满 $20×7。<br>
+    🟢 ISP 2 → 3，CPA $27 → $17。清词后 CTR 拉到 4.2%。<br>
+    🟠 但 7 单里 4 单集中在 10.21。周度样本仍小，加预算会把贵点击也放大。
+  </div>
+  <div class="chart-box tall"><canvas id="purDailyChart"></canvas></div>
+  <div class="footnote">本周每日购买。10.21 是尖峰，10.19/20/23/24 挂零。单日挂零不改时段。</div>
+</div>
+
+<h2 class="sec" id="s4">六、全周期逐周趋势(8.26 - 10.25)</h2>
+<div class="card">
+  <table>
+    <tr><th>周</th><th>消耗</th><th>展示</th><th>CPM</th><th>点击</th><th>CTR</th><th>CPC</th><th>注册</th><th>注册率</th><th>注册成本</th><th>购买</th><th>购买率</th><th>购买成本</th></tr>
+    <tr class="dim"><td>8.24 - 8.30 *</td><td>$46.48</td><td>1,981</td><td>$23.5</td><td>70</td><td>3.53%</td><td>$0.66</td><td>0</td><td>-</td><td>-</td><td>0</td><td>-</td><td>-</td></tr>
+    <tr><td>8.31 - 9.6</td><td>$235.15</td><td>13,887</td><td>$16.9</td><td>365</td><td>2.63%</td><td>$0.64</td><td>10</td><td>2.74%</td><td>$23.51</td><td>0</td><td>-</td><td>-</td></tr>
+    <tr><td>9.7 - 9.13</td><td>$307.35</td><td>6,878</td><td>$44.7</td><td>267</td><td>3.88%</td><td>$1.15</td><td>7</td><td>2.62%</td><td>$43.91</td><td>2</td><td>0.75%</td><td>$153.68</td></tr>
+    <tr><td>9.14 - 9.20</td><td>$227.98</td><td>7,886</td><td>$28.9</td><td>264</td><td>3.35%</td><td>$0.86</td><td>11</td><td>4.17%</td><td>$20.73</td><td>1</td><td>0.38%</td><td>$227.98</td></tr>
+    <tr><td>9.21 - 9.27</td><td>$163.42</td><td>8,811</td><td>$18.5</td><td>243</td><td>2.76%</td><td>$0.67</td><td>11</td><td>4.53%</td><td>$14.86</td><td>3</td><td>1.23%</td><td class="pos">$54.47</td></tr>
+    <tr><td>9.28 - 10.4</td><td>$363.48</td><td>12,073</td><td>$30.1</td><td>395</td><td>3.27%</td><td>$0.92</td><td>19</td><td>4.81%</td><td>$19.13</td><td>3</td><td>0.76%</td><td>$121.16</td></tr>
+    <tr><td>10.5 - 10.11</td><td>$228.40</td><td>9,393</td><td>$24.3</td><td>284</td><td>3.02%</td><td>$0.80</td><td>11</td><td>3.87%</td><td>$20.76</td><td>2</td><td>0.70%</td><td>$114.20</td></tr>
+    <tr><td>10.12 - 10.18</td><td>$301.98</td><td>16,025</td><td>$18.8</td><td>364</td><td>2.27%</td><td>$0.83</td><td>20</td><td class="pos">5.49%</td><td class="pos">$15.10</td><td>4</td><td>1.10%</td><td>$75.50</td></tr>
+    <tr class="hl"><td>10.19 - 10.25</td><td>$361.41</td><td>11,006</td><td>$32.8</td><td>334</td><td>3.03%</td><td>$1.08</td><td>15</td><td>4.49%</td><td>$24.09</td><td>7</td><td class="pos">2.10%</td><td class="pos">$51.63</td></tr>
+  </table>
+  <div class="footnote">* 首周只含 8.26 - 8.30 共 5 天，不参与环比。本表注册率/购买率 = 转化 ÷ 点击(跟历史周报同一把尺子)。第二节漏斗购买率 = 购买 ÷ 注册。</div>
+
+  <div class="chart-box">
+    <canvas id="weeklyChart"></canvas>
+  </div>
+  <div class="footnote">周消耗为柱(左轴)，注册(绿)/购买(橙)为线(右轴)。</div>
+
+  <div class="chart-box tall">
+    <canvas id="cpaChart"></canvas>
+  </div>
+  <div class="footnote">逐周购买成本。0 购买的周无柱。样本小，看方向：9.21 起每周都有单，成本整体下移，本周 $51.63 创有单周新低。</div>
+</div>
+
+<div class="co ci"><b>趋势怎么读：</b>注册端从 9 月中旬起大多周在 10–20 单。本周 15 单是回落不是崩。购买端从 9.21 起连续 6 周每周 ≥2 单，本周 7 单是新高，但一天(10.21)就贡献了 4 单，周度波动还是大，别按这一周去加预算。</div>
+
+<h2 class="sec" id="s5">七、上周逐日明细(10.19 - 10.25)</h2>
+<div class="card">
+  <table>
+    <tr><th>日期</th><th>消耗</th><th>展示</th><th>点击</th><th>CTR</th><th>CPC</th><th>注册</th><th>注册率</th><th>购买</th><th>购买成本</th></tr>
+    <tr><td>10.19 周一</td><td>$60.14</td><td>1,819</td><td>50</td><td>2.75%</td><td>$1.20</td><td>2</td><td>4.0%</td><td>0</td><td>—</td></tr>
+    <tr><td>10.20 周二</td><td>$58.95</td><td>1,754</td><td>54</td><td>3.08%</td><td>$1.09</td><td>2</td><td>3.7%</td><td>0</td><td>—</td></tr>
+    <tr class="hl"><td>10.21 周三</td><td>$56.21</td><td>1,995</td><td>56</td><td>2.81%</td><td>$1.00</td><td>2</td><td>3.6%</td><td>4</td><td class="pos">$14.05</td></tr>
+    <tr><td>10.22 周四</td><td>$54.91</td><td>1,113</td><td>52</td><td>4.67%</td><td>$1.06</td><td>3</td><td>5.8%</td><td>1</td><td>$54.91</td></tr>
+    <tr><td>10.23 周五</td><td>$45.72</td><td>1,322</td><td>43</td><td>3.25%</td><td>$1.06</td><td>3</td><td>7.0%</td><td>0</td><td>—</td></tr>
+    <tr><td>10.24 周六</td><td>$42.58</td><td>1,417</td><td>40</td><td>2.82%</td><td>$1.06</td><td>2</td><td>5.0%</td><td>0</td><td>—</td></tr>
+    <tr><td>10.25 周日</td><td>$42.90</td><td>1,586</td><td>39</td><td>2.46%</td><td>$1.10</td><td>1</td><td>2.6%</td><td>2</td><td>$21.45</td></tr>
+  </table>
+  <div class="footnote">单日由周内累计差分还原。合计消耗 $361.41、注册 15、购买 7。</div>
+
+  <h3>分系列日消耗(差分还原)</h3>
+  <table>
+    <tr><th>日期</th><th>动态购买</th><th>动态注册</th><th>ISP</th></tr>
+    <tr><td>10.19</td><td>$23.13</td><td>$24.12</td><td>$12.89</td></tr>
+    <tr><td>10.20</td><td>$22.84</td><td>$23.32</td><td>$12.79</td></tr>
+    <tr class="hl"><td>10.21</td><td>$21.84</td><td>$23.38</td><td>$10.99</td></tr>
+    <tr><td>10.22</td><td>$23.04</td><td>$21.58</td><td>$10.29</td></tr>
+    <tr><td>10.23</td><td>$20.95</td><td>$19.77</td><td>$5.00</td></tr>
+    <tr><td>10.24</td><td>$18.32</td><td>$24.26</td><td class="neg">$0.00</td></tr>
+    <tr><td>10.25</td><td>$19.77</td><td>$23.13</td><td class="neg">$0.00</td></tr>
+  </table>
+  <div class="co cw">ISP 10.23 只花 $5，10.24-10.25 完全停。购买周合计仍是动态购买 4 + ISP 3，日级归属不拆(网格嵌套会串行)。缺量优先查词，不是加预算。</div>
+
+  <div class="chart-box tall">
+    <canvas id="dailyChart"></canvas>
+  </div>
+  <div class="footnote">全周期逐日消耗(蓝柱)与每日购买(橙点)。10.21 一天 4 单，占全周购买一半以上。</div>
+</div>
+
+<h2 class="sec" id="s6">八、GA4 口径对照(bing/cpc)</h2>
+<div class="card">
+  <table>
+    <tr><th>窗口</th><th>Bing 注册</th><th>GA4 注册</th><th>倍率</th><th>Bing 购买</th><th>GA4 购买</th><th>倍率</th></tr>
+    <tr><td>本周 10.19-10.25</td><td>15</td><td>31</td><td>2.07×</td><td>7</td><td>7</td><td>1.00×</td></tr>
+    <tr><td>上周 10.12-10.18</td><td>20</td><td>30</td><td>1.50×</td><td>4</td><td>7</td><td>1.75×</td></tr>
+    <tr class="hl"><td>10 月 MTD 1-25 日</td><td>—</td><td>106</td><td>—</td><td>—</td><td>18</td><td>—</td></tr>
+  </table>
+  <div class="co ci">
+    Bing pixel 低估注册的老问题还在：本周 15 vs GA4 31(约 2.1×)。购买本周两边都是 7，上周 GA4 多 3 单(4 vs 7)，更像回补时差，不是这周突然对齐了。<br>
+    趋势部分继续用账户口径(同一把尺子量 9 周)。估真实产出时，注册习惯性 ×1.6–2.1，购买先看 GA4，别只信 pixel。
+  </div>
+  <div class="co cs">GA4 本周购买日：10.21=2、10.22=2、10.25=3。账户是 10.21=4、10.22=1、10.25=2。总量吻合，落日对不齐，周报仍以账户日表为准。</div>
+</div>
+
+<h2 class="sec" id="s7">九、本周观察项(10.26-11.1)</h2>
+<div class="card">
+  <div class="co cw"><b>本周主线：不因 7 单加预算。</b>购买成本好看，但一天贡献一半，ISP 后半周已经没量。先处理停量和受众网络，预算下周再议。</div>
+
+  <div class="action ok">
+    <div class="head"><span class="pri p1">P1</span> 🟢 三条活动关掉受众网络</div>
+    连续两周 $3.58 / $7.45，共 22 点、0 主转化。搜索侧够吃，受众网络纯漏。
+  </div>
+  <div class="action warn">
+    <div class="head"><span class="pri p1">P1</span> 🟠 ISP 后半周停量</div>
+    10.24-10.25 消耗 $0。词已经收过一轮。缺量就加回 <code>isp proxy</code> 精确 / <code>buy isp proxy</code> 短语，不要把 <code>buy proxy</code> 广泛加回来。登录过期，本周搜索词表没刷到，下次登录后补。
+  </div>
+  <div class="action warn">
+    <div class="head"><span class="pri p2">P2</span> 🟡 动态购买不因 7 单加钱</div>
+    排名损失 95%，预算损失只有 4%。瓶颈在位置不是预算。CPA $37 看两周，样本够了再谈 $20 → $25。
+  </div>
+  <div class="action ok">
+    <div class="head"><span class="pri p2">P2</span> 🟢 注册系列维持 $20 / 不改出价</div>
+    量从 20 回到 15，CPA 仍 $10.64。这是可预测基本盘，别拿一周高峰当新常态。
+  </div>
+  <div class="action">
+    <div class="head"><span class="pri p3">P3</span> 11 月初对月结发票和 IO 剩余额度</div>
+    余额不够会直接停量。跟 Google 10.30 / 10.31 那两个判决无关，Bing 这边没有月底挪预算的既定动作。
+  </div>
+</div>
+
+<div style="text-align:center; color:#9ca3af; font-size:12px; margin-top:30px;">IPOasis Bing Ads · 10.19 - 10.25 周报 · 数据源:Bing 账户后台 + GA4 bing/cpc · 生成于 2026.10.26</div>
+</div>
+
+<script>
+const WEEKS = ["8.24*","8.31","9.7","9.14","9.21","9.28","10.5","10.12","10.19"];
+const COST = [46.48, 235.15, 307.35, 227.98, 163.42, 363.48, 228.40, 301.98, 361.41];
+const REG  = [0, 10, 7, 11, 11, 19, 11, 20, 15];
+const PUR  = [0, 0, 2, 1, 3, 3, 2, 4, 7];
+
+new Chart(document.getElementById('weeklyChart'), {
+  data: {
+    labels: WEEKS,
+    datasets: [
+      { type: 'bar', label: '周消耗($)', data: COST, backgroundColor: '#7fb3e3', yAxisID: 'y', order: 2 },
+      { type: 'line', label: '注册(右轴)', data: REG, borderColor: '#0d904f', backgroundColor: '#0d904f', tension: .3, yAxisID: 'y1', order: 1 },
+      { type: 'line', label: '购买(右轴)', data: PUR, borderColor: '#e8710a', backgroundColor: '#e8710a', tension: .3, yAxisID: 'y1', order: 1 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'bottom' } },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: '消耗($)' }, grid: { color: '#f0f2f5' } },
+      y1: { beginAtZero: true, position: 'right', title: { display: true, text: '转化数' }, grid: { drawOnChartArea: false }, suggestedMax: 24 }
+    }
+  }
+});
+
+const CPA = [null, null, 153.68, 227.98, 54.47, 121.16, 114.20, 75.50, 51.63];
+new Chart(document.getElementById('cpaChart'), {
+  type: 'bar',
+  data: {
+    labels: WEEKS,
+    datasets: [
+      { label: '购买成本($)', data: CPA, backgroundColor: '#7fb3e3' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, title: { display: true, text: '购买成本($)' }, suggestedMax: 260, grid: { color: '#f0f2f5' } } }
+  }
+});
+
+const DAYS = ["8.26","8.27","8.28","8.29","8.30","8.31","9.1","9.2","9.3","9.4","9.5","9.6","9.7","9.8","9.9","9.10","9.11","9.12","9.13","9.14","9.15","9.16","9.17","9.18","9.19","9.20","9.21","9.22","9.23","9.24","9.25","9.26","9.27","9.28","9.29","9.30","10.1","10.2","10.3","10.4","10.5","10.6","10.7","10.8","10.9","10.10","10.11","10.12","10.13","10.14","10.15","10.16","10.17","10.18","10.19","10.20","10.21","10.22","10.23","10.24","10.25"];
+const DCOST = [10.83,11.43,5.94,10.13,8.15,3.00,37.60,39.82,39.95,38.98,40.44,35.36,47.20,47.79,44.92,43.36,41.15,42.16,40.77,41.25,40.91,39.17,29.20,37.24,26.43,13.78,32.33,14.83,10.13,24.33,20.10,25.53,36.17,38.63,62.23,66.03,55.20,59.29,46.14,35.96,32.47,30.07,25.46,34.43,32.99,30.59,42.39,38.91,30.51,53.71,42.70,35.60,50.71,49.84,60.14,58.95,56.21,54.91,45.72,42.58,42.90];
+const DPUR  = [0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,2,1,0,1,0,0,1,0,0,1,0,0,0,0,1,1,0,0,0,2,0,1,0,0,4,1,0,0,2];
+
+new Chart(document.getElementById('dailyChart'), {
+  data: {
+    labels: DAYS,
+    datasets: [
+      { type: 'bar', label: '日消耗($)', data: DCOST, backgroundColor: '#a9c9e8', yAxisID: 'y', order: 2 },
+      { type: 'line', label: '日购买(右轴)', data: DPUR, borderColor: '#e8710a', backgroundColor: '#e8710a', showLine: false, pointRadius: 3.5, yAxisID: 'y1', order: 1 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'bottom' } },
+    scales: {
+      x: { ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 12, font: { size: 10 } } },
+      y: { beginAtZero: true, title: { display: true, text: '消耗($)' }, grid: { color: '#f0f2f5' } },
+      y1: { beginAtZero: true, position: 'right', title: { display: true, text: '购买' }, grid: { drawOnChartArea: false }, suggestedMax: 4, ticks: { stepSize: 1 } }
+    }
+  }
+});
+
+new Chart(document.getElementById('campCostChart'), {
+  type: 'bar',
+  data: {
+    labels: ['动态购买','动态注册','ISP'],
+    datasets: [
+      { label: '本周', data: [149.89, 159.56, 51.96], backgroundColor: '#1a73c7' },
+      { label: '上周', data: [86.15, 161.58, 54.25], backgroundColor: '#d1d5db' }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, title: { display: true, text: '各活动花费($)' } } }
+});
+new Chart(document.getElementById('campPurChart'), {
+  type: 'bar',
+  data: {
+    labels: ['动态购买','动态注册','ISP'],
+    datasets: [
+      { label: '本周购买', data: [4, 0, 3], backgroundColor: '#e8710a' },
+      { label: '上周购买', data: [2, 0, 2], backgroundColor: '#d1d5db' }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, title: { display: true, text: '各活动购买' } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+});
+new Chart(document.getElementById('purDailyChart'), {
+  type: 'bar',
+  data: { labels: ['10.19','10.20','10.21','10.22','10.23','10.24','10.25'], datasets: [{ label: '购买', data: [0,0,4,1,0,0,2], backgroundColor: '#e8710a' }] },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: '本周每日购买' } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+});
+
+const secs = [...document.querySelectorAll('h2.sec')];
+const links = [...document.querySelectorAll('nav.toc a')];
+window.addEventListener('scroll', () => {
+  let cur = secs[0];
+  for (const s of secs) { if (s.getBoundingClientRect().top < 140) cur = s; }
+  links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur.id));
+}, { passive: true });
+</script>
+</body>
+</html>

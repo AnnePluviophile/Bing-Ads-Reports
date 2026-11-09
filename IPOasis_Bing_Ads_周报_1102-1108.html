@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IPOasis Bing Ads 周报 11.2-11.8</title>
+<style>
+
+:root{--p:#1a73e8;--g:#0d904f;--r:#d93025;--o:#e8710a;--bg:#f8f9fa;--card:#fff;--bd:#dadce0;--t1:#202124;--t2:#5f6368}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Microsoft YaHei",sans-serif;background:var(--bg);color:var(--t1);line-height:1.75;padding:32px 16px;font-size:14px}
+.ctn{max-width:980px;margin:0 auto}
+.hdr{text-align:center;padding:36px 24px;background:linear-gradient(135deg,#1a73e8,#5b9bf0);color:#fff;border-radius:16px;margin-bottom:28px;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%)}
+.hdr h1{font-size:24px;margin-bottom:4px;font-weight:700;position:relative}
+.hdr .sub{font-size:13px;opacity:.9;position:relative}
+.sec{background:var(--card);border-radius:12px;padding:28px 32px;margin-bottom:18px;border:1px solid var(--bd);transition:all .2s}
+.sec:hover{box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.sec h2{font-size:18px;color:var(--p);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e8f0fe;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}
+.sec h2 .toggle{font-size:14px;color:var(--t2);transition:transform .3s}
+.sec.collapsed .body{display:none}
+.sec.collapsed h2 .toggle{transform:rotate(-90deg)}
+.sec h3{font-size:14px;color:var(--t1);margin:20px 0 10px;font-weight:700}
+table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:12px}
+th{background:#f1f3f4;color:var(--t2);padding:8px;text-align:left;font-weight:600;white-space:nowrap;border-bottom:1px solid var(--bd)}
+td{padding:7px 8px;border-bottom:1px solid #f0f0f0;color:var(--t2)}
+tr:hover td{background:#f8f9fa}
+.up{color:var(--g);font-weight:600}.down{color:var(--r);font-weight:600}.flat{color:var(--t2);font-weight:600}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:.3px}
+.tg{background:#e6f4ea;color:#137333}.tr{background:#fce8e6;color:#c5221f}.tb{background:#e8f0fe;color:#1967d2}.to{background:#fef3e6;color:#c5600a}.ty{background:#f1f3f4;color:#5f6368}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}
+.kpi-card{background:linear-gradient(135deg,#f8f9fa,#fff);padding:18px;border-radius:10px;border:1px solid var(--bd);text-align:center;transition:all .25s;cursor:default}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08);border-color:var(--p)}
+.kpi-card .ico{font-size:20px;margin-bottom:6px}
+.kpi-card .v{font-size:22px;font-weight:700;color:var(--t1);line-height:1.2}
+.kpi-card .l{font-size:11px;color:var(--t2);margin-top:4px}
+.kpi-card .c{font-size:11px;margin-top:6px;padding:2px 8px;border-radius:10px;display:inline-block}
+.kpi-card .c.up{background:#e6f4ea;color:#137333}
+.kpi-card .c.down{background:#fce8e6;color:#c5221f}
+.kpi-card .c.flat{background:#f1f3f4;color:#5f6368}
+.kpi-card.warn{border-color:#fde9c8;background:linear-gradient(135deg,#fffaf0,#fff)}
+.kpi-card.warn .v{color:var(--o)}
+.kpi-card.bad{border-color:#fce8e6;background:linear-gradient(135deg,#fff7f6,#fff)}
+.kpi-card.bad .v{color:var(--r)}
+.kpi-card.good{border-color:#e6f4ea;background:linear-gradient(135deg,#f5fcf7,#fff)}
+.kpi-card.good .v{color:var(--g)}
+.co{padding:14px 20px;border-radius:8px;margin:12px 0;font-size:13px;line-height:1.85}
+.ci{background:#e8f4fd;border-left:4px solid var(--p)}
+.cw{background:#fff4e5;border-left:4px solid var(--o)}
+.cs{background:#e6f4ea;border-left:4px solid var(--g)}
+.cr{background:#fce8e6;border-left:4px solid var(--r)}
+p{font-size:13px;color:var(--t2);margin-bottom:10px;line-height:1.85}
+strong{color:var(--t1)} em{font-style:normal;color:var(--p);font-weight:600}
+code{background:#f1f3f4;padding:1px 5px;border-radius:3px;font-size:12px;color:#c5221f}
+.insight{background:#fffdf5;border:1px solid #fde293;border-radius:8px;padding:16px 20px;margin:14px 0}
+.insight-title{font-size:13px;font-weight:700;color:#b06000;margin-bottom:6px}
+.verdict{font-size:14px;font-weight:700;color:var(--t1);margin:10px 0;padding:14px;background:#e6f4ea;border-radius:8px;border-left:4px solid var(--g)}
+.chart-wrap{margin:16px 0;background:#fff;padding:18px;border-radius:10px;border:1px solid var(--bd);position:relative}
+.chart-wrap canvas{max-height:300px}
+.chart-title{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.chart-sub{font-size:11px;color:var(--t2);margin-bottom:8px}
+.chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:14px;margin:14px 0}
+.action-item{background:#fff;border-radius:10px;padding:16px 18px;margin:10px 0;border-left:4px solid var(--p);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.action-item.warn{border-left-color:var(--o);background:linear-gradient(90deg,#fff8eb 0%,#fff 100%)}
+.action-item.bad{border-left-color:var(--r);background:linear-gradient(90deg,#fff6f5 0%,#fff 100%)}
+.action-item.ok{border-left-color:var(--g);background:linear-gradient(90deg,#f5fcf7 0%,#fff 100%)}
+.action-item .head{font-weight:700;color:var(--t1);font-size:13px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.priority-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:.3px}
+.priority-tag.p1{background:#e8710a;color:#fff}
+.priority-tag.p2{background:#1a73e8;color:#fff}
+.priority-tag.p3{background:#5f6368;color:#fff}
+.nav{position:fixed;top:20px;right:20px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.1);font-size:11px;z-index:100;max-width:160px}
+.nav a{display:block;color:var(--t2);text-decoration:none;padding:4px 0 4px 8px;border-radius:4px;border-left:3px solid transparent;transition:all .15s}
+.nav a:hover{color:var(--p);background:#e8f0fe}
+.nav a.active{color:var(--p);background:#e8f0fe;border-left:3px solid var(--p);font-weight:700}
+.callout{background:#e8f0fe;border:1px solid #aecbfa;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;color:#185abc}
+.callout strong{color:#0b3a8a}
+.callout.gr{background:#e6f4ea;border-color:#a8d5b5;color:#137333}
+.callout.gr strong{color:#0b5a2a}
+.callout.wn{background:#fff4e5;border-color:#f6d19a;color:#a5560a}
+.callout.wn strong{color:#7a3e00}
+@media (max-width:780px){.nav{display:none}}
+@media print{body{padding:0;background:#fff}.sec{break-inside:avoid;page-break-inside:avoid}.nav{display:none}}
+
+</style></head><body>
+<nav class="nav">
+<a href="#s0">核心结论</a>
+<a href="#s1">大盘对比</a>
+<a href="#s2">系列拆分</a>
+<a href="#s3">每日明细</a>
+<a href="#s4">观察项</a>
+</nav>
+<div class="ctn"><div class="hdr"><h1>IPOasis Bing Ads 周报</h1>
+<div class="sub">11.2(周一) ~ 11.8(周日) | 报告出具 11.9 | 口径：保存报告</div></div>
+
+<div class="sec" id="s0"><h2>核心结论 <span class="toggle">▼</span></h2><div class="body">
+<div class="verdict">消耗 $290、购买 4 单，是近三周最好的一周，购买成本从 $262 降到 $72。但多出来的钱主要是 ISP 系列在花钱，它上周被判暂停，这周没停，反而花了 $64 只换 1 单。</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="ico">💰</div><div class="v">$290</div><div class="l">总消耗</div><div class="c flat">vs 上周 $262</div></div>
+<div class="kpi-card good"><div class="ico">✅</div><div class="v">15</div><div class="l">注册</div><div class="c up">注册成本 $19.3</div></div>
+<div class="kpi-card good"><div class="ico">🛒</div><div class="v">4</div><div class="l">购买</div><div class="c up">vs 上周 1</div></div>
+<div class="kpi-card good"><div class="ico">💸</div><div class="v">$72</div><div class="l">购买成本</div><div class="c up">vs 上周 $262</div></div>
+</div>
+<p style="font-size:11px;color:#999">🟢 好于上周 &nbsp; 🟠 待处理 &nbsp; 🟡 观察中</p>
+</div></div>
+
+<div class="sec" id="s1"><h2>一、大盘对比 <span class="toggle">▼</span></h2><div class="body">
+<table><tr><th>周</th><th>消耗</th><th>展示</th><th>CPM</th><th>点击</th><th>CTR</th><th>CPC</th><th>注册</th><th>注册成本</th><th>购买</th><th>购买成本</th></tr>
+<tr><td>本周(11.2-11.8)</td><td>$289.89</td><td>10,085</td><td>$28.74</td><td>286</td><td>2.84%</td><td>$1.01</td><td>15</td><td>$19.33</td><td>4</td><td>$72.47</td></tr>
+<tr><td>上周(10.26-11.1)</td><td>$262.45</td><td>8,086</td><td>$32.46</td><td>238</td><td>2.94%</td><td>$1.10</td><td>20</td><td>$13.12</td><td>1</td><td>$262.45</td></tr>
+<tr><td>上上周(10.19-10.25)</td><td>$277</td><td>无</td><td>无</td><td>236</td><td>无</td><td>$1.17</td><td>13</td><td>$21.31</td><td>5</td><td>$55.40</td></tr></table>
+<div class="co ci">点击多了 48 个，CPC 从 $1.10 降到 $1.01，流量变便宜了。注册从 20 掉到 15，但购买从 1 回到 4，回到 10.19-10.25 那周的水平。单周购买成本波动大，三周放一起看是 $262、$72、$55，这周落在正常区间里。</div>
+<p style="font-size:11px;color:#999">口径：保存报告（报告转化，点击归因）。后台「所有转化」口径本周为注册 30、购买 6，上周参考值为注册约 40、购买约 4。两套口径差一倍左右，周报统一用保存报告口径，方便和历史周报对齐。</p>
+</div></div>
+
+<div class="sec" id="s2"><h2>二、系列拆分 <span class="toggle">▼</span></h2><div class="body">
+<table><tr><th>系列</th><th>消耗</th><th>展示</th><th>点击</th><th>CPC</th><th>注册</th><th>购买</th><th>购买成本</th><th>判断</th></tr>
+<tr><td>动态购买</td><td>$128.02</td><td>3,529</td><td>76</td><td>$1.68</td><td>0</td><td>3</td><td>$42.67</td><td><span class="tag tg">主力，3 单最便宜</span></td></tr>
+<tr><td>动态注册</td><td>$97.53</td><td>4,049</td><td>135</td><td>$0.72</td><td>15</td><td>0</td><td>无</td><td><span class="tag tb">只出注册，符合定位</span></td></tr>
+<tr><td>ISP 购买</td><td>$64.34</td><td>2,507</td><td>75</td><td>$0.86</td><td>0</td><td>1</td><td>$64.34</td><td><span class="tag to">上周判暂停，本周未执行</span></td></tr>
+</table>
+<div class="co cw"><b>ISP 系列的暂停没有落地。</b>上周周报写的是 10.29 起零消耗、正式进入暂停流程。实际它这周花了 $64.34，75 次点击，出 1 单。单看这 1 单，$64 的成本不算差，但它是三条里最贵的，而且占了本周多出来的 $27 消耗里的全部。要不要真停，这周需要拍板，不能再挂着。</div>
+<div class="co cs">动态购买这周 3 单、成本 $43，是账户里最好的一条，也是近几周第一次稳定出单而不是靠某一天脉冲。动态注册 15 个注册、0 购买，注册成本 $6.50，继续只当注册来源用。</div>
+</div></div>
+
+<div class="sec" id="s3"><h2>三、每日明细 <span class="toggle">▼</span></h2><div class="body">
+<table><tr><th>日期</th><th>消耗</th><th>展示</th><th>CPM</th><th>点击</th><th>CTR</th><th>CPC</th><th>注册</th><th>购买</th></tr>
+<tr><td>11.2 周一</td><td>$38.38</td><td>1,407</td><td>$27.28</td><td>30</td><td>2.13%</td><td>$1.28</td><td>1</td><td>0</td></tr>
+<tr><td>11.3 周二</td><td>$33.93</td><td>1,521</td><td>$22.31</td><td>46</td><td>3.02%</td><td>$0.74</td><td>1</td><td>0</td></tr>
+<tr><td>11.4 周三</td><td>$39.50</td><td>1,417</td><td>$27.88</td><td>41</td><td>2.89%</td><td>$0.96</td><td>2</td><td>1</td></tr>
+<tr><td>11.5 周四</td><td>$42.14</td><td>1,656</td><td>$25.45</td><td>54</td><td>3.26%</td><td>$0.78</td><td>2</td><td>0</td></tr>
+<tr><td>11.6 周五</td><td>$25.07</td><td>1,579</td><td>$15.88</td><td>39</td><td>2.47%</td><td>$0.64</td><td>1</td><td>1</td></tr>
+<tr><td>11.7 周六</td><td>$44.98</td><td>1,243</td><td>$36.19</td><td>35</td><td>2.82%</td><td>$1.29</td><td>4</td><td>1</td></tr>
+<tr><td>11.8 周日</td><td>$65.89</td><td>1,262</td><td>$52.21</td><td>41</td><td>3.25%</td><td>$1.61</td><td>4</td><td>1</td></tr>
+</table>
+<div class="chart-wrap"><div class="chart-title">每日消耗与购买</div>
+<canvas id="daily"></canvas></div>
+<div class="co cw"><b>11.8 周日单日花了 $65.89，是平日的近两倍，CPC 冲到 $1.61。</b>当天出了 1 单、4 个注册，所以不是纯浪费，但这个跳变没有对应的预算调整记录。如果是竞价策略自己放量，下周要盯着周日是否重复；如果是人为改过预算，需要补记。</div>
+</div></div>
+
+<div class="sec" id="s4"><h2>四、本周观察项 <span class="toggle">▼</span></h2><div class="body">
+<div class="action-item warn">
+<div class="head"><span class="priority-tag p1">P1</span> ISP 系列暂停悬而未决</div>
+上周结论是 10.29 起零消耗、进入暂停。本周它实际消耗 $64.34、1 单购买，成本 $64，三条里最高。两条路：按原计划暂停，或者承认它还在出单、把暂停结论收回。不能再停在「说暂停但没停」的状态。
+</div>
+<div class="action-item">
+<div class="head"><span class="priority-tag p2">P2</span> 查 11.8 的消耗跳变</div>
+周日 $65.89、CPC $1.61，约为平日两倍，当天有 1 单所以不是空烧。先确认是不是有人调过预算或出价，再决定要不要给周日加花费上限。
+</div>
+<div class="action-item ok">
+<div class="head"><span class="priority-tag p3">P3</span> 预算先不动</div>
+动态购买 $43 出 3 单是这周最好的信号，但只有一周，先再观察一周再谈加预算。动态注册维持现状。
+</div>
+</div></div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+new Chart(document.getElementById('daily'),{type:'bar',data:{
+ labels:['11.2','11.3','11.4','11.5','11.6','11.7','11.8'],
+ datasets:[
+  {label:'消耗($)',data:[38.38,33.93,39.50,42.14,25.07,44.98,65.89],backgroundColor:'#aecbfa',yAxisID:'y',order:2},
+  {label:'购买',data:[0,0,1,0,1,1,1],type:'line',borderColor:'#0d904f',backgroundColor:'#0d904f',tension:.3,yAxisID:'y1',order:1}
+ ]},options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{position:'left',title:{display:true,text:'消耗($)'}},y1:{position:'right',min:0,max:4,grid:{drawOnChartArea:false},title:{display:true,text:'购买'}}}}});
+document.querySelectorAll('.sec h2').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('collapsed')));
+const navLinks=[...document.querySelectorAll('.nav a')];
+const secs=[...document.querySelectorAll('.sec')];
+const spy=()=>{let cur=secs[0];secs.forEach(s=>{if(s.getBoundingClientRect().top<140)cur=s});navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur.id))};
+document.addEventListener('scroll',spy,{passive:true});spy();
+</script></body></html>
